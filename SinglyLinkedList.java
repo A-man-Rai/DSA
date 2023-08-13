@@ -167,21 +167,79 @@ class SinglyLinkedList{
    temp.next=temp.next.next;
   }
 
+  public String printData(){
+    Node temp=head;
+    String str="";
+    while(temp!=null){
+      str+=temp.val;
+      temp=temp.next;
+    }
+    return str;
+  }
+
+  public boolean checkPalindrome(){
+    String str=printData();
+    reverse();
+    String str2=printData();
+    if(str.equals(str2)){
+      System.out.println("YES IT IS PALIN");
+        return true;
+    }
+    System.out.println("NO IT IS NOT PALIN");
+    return false;
+    
+  }
+
+  public void makeCycle(){
+    int i=0;
+    Node temp=head;
+    while(i<=2){
+       temp=temp.next;
+       i++;
+    }
+      tail.next=temp;
+  }
+  public int detectCycle() {
+    Node fast = head;
+    Node slow = head;
+
+    while (fast != null && fast.next != null) {
+        fast = fast.next.next;
+        slow = slow.next;
+        if (slow == fast){ 
+        int count = 0;
+        Node temp = slow;
+        do {
+            temp = temp.next;
+            count++;
+        } while (temp != slow);
+    
+         return count; 
+        }
+    }
+       return 0;
+    }
+
+
     public static void main(String args[]){
      SinglyLinkedList list=new SinglyLinkedList();
      list.addFirst(1);
      list.addFirst(2);
-     list.addFirst(3);
+     list.addFirst(1);
      list.addFirst(4);
      list.addLast(0);
-     list.addLast(-1);
-     list.last(-2);
+     list.addLast(2);
+      list.last(5);
      list.insertAt(3,10);
-     list.deleteNthFromBack(1);
+     //list.deleteNthFromBack(1);
      //list.deleteFirst();
      //list.deleteLast();
     // list.deleteByIndex(2);
-     list.print();
+    list.makeCycle();
+    System.out.print(list.detectCycle());
+    
+   // list.print();
+    // list.checkPalindrome();
      //list.reverse();
      //list.print();
      //list.searchByValue(4);
