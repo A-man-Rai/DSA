@@ -147,6 +147,26 @@ class SinglyLinkedList{
    size--;
   }
 
+  public void deleteNthFromBack(int n){
+   int position =size-n;
+   if(position==0){
+      deleteFirst();
+      return;
+   }
+   if(position==size-1){
+    deleteLast();
+    return;
+   }
+   Node temp=head;
+   int i=1;
+   while(i<position){
+    temp=temp.next;
+    i++;
+   }
+   size--;
+   temp.next=temp.next.next;
+  }
+
     public static void main(String args[]){
      SinglyLinkedList list=new SinglyLinkedList();
      list.addFirst(1);
@@ -157,16 +177,17 @@ class SinglyLinkedList{
      list.addLast(-1);
      list.last(-2);
      list.insertAt(3,10);
-     list.deleteFirst();
-     list.deleteLast();
-     list.deleteByIndex(2);
+     list.deleteNthFromBack(1);
+     //list.deleteFirst();
+     //list.deleteLast();
+    // list.deleteByIndex(2);
      list.print();
-     list.reverse();
-     list.print();
-     list.searchByValue(4);
-    list.deleteAll();
-    list.print();
-     System.out.println(list.size());
+     //list.reverse();
+     //list.print();
+     //list.searchByValue(4);
+    //list.deleteAll();
+    //list.print();
+     //System.out.println(list.size());
 
 
     }
