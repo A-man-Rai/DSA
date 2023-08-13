@@ -38,6 +38,10 @@ class SinglyLinkedList{
 
     public void print(){
        Node temp=head;
+       if(temp==null){
+          System.out.println("LIST IS EMPTY");
+          return;
+       }
        while(temp!=null){
          System.out.print(temp.val+" ");
          temp=temp.next;
@@ -117,6 +121,12 @@ class SinglyLinkedList{
      tail=temp; 
   }
   
+  public void deleteAll(){
+    head=null;
+    tail=null;
+    size=0;
+    System.out.println("DELETED LINKEDLIST");
+  }
 
   public void deleteByIndex(int index){
    if(index==0){
@@ -154,7 +164,8 @@ class SinglyLinkedList{
      list.reverse();
      list.print();
      list.searchByValue(4);
-
+    list.deleteAll();
+    list.print();
      System.out.println(list.size());
 
 
