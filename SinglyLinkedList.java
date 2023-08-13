@@ -220,25 +220,39 @@ class SinglyLinkedList{
        return 0;
     }
 
+   public void findMiddleNode(){
+      Node slow=head;
+      Node fast=head;
+   while(fast.next!=null){
+     
+      if(fast.next.next==null){
+          break;
+      }
+      slow=slow.next;
+      fast=fast.next.next;
+   }
+   System.out.println("MIDDLE OF LIST VALUE IS :"+slow.val);
+   }
 
     public static void main(String args[]){
      SinglyLinkedList list=new SinglyLinkedList();
      list.addFirst(1);
      list.addFirst(2);
-     list.addFirst(1);
+     list.addFirst(8);
      list.addFirst(4);
      list.addLast(0);
      list.addLast(2);
       list.last(5);
+    //  list.last(15);
      list.insertAt(3,10);
      //list.deleteNthFromBack(1);
      //list.deleteFirst();
      //list.deleteLast();
     // list.deleteByIndex(2);
-    list.makeCycle();
-    System.out.print(list.detectCycle());
-    
-   // list.print();
+    //list.makeCycle();
+    //System.out.print(list.detectCycle());
+    list.print();
+    list.findMiddleNode();
     // list.checkPalindrome();
      //list.reverse();
      //list.print();
