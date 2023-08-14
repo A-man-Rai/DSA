@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 class InsertionSort{
     static void sort(int[]arr){
        for(int i=0;i<arr.length-1;i++){
@@ -14,10 +16,26 @@ class InsertionSort{
          }
        }
     }
+
+    public static int generateRandomInteger(){
+      Random rand = new Random();
+      return rand.nextInt(1000);
+    }
      public static void main(String args[]){
-     int[]arr={5,3,4,2,1};
+    int n=100000;
+    int[]arr=new int[n];
+    int i=0;
+    long start = System.currentTimeMillis();
+    while(i<n){
+      arr[i]=generateRandomInteger();
+      i++;
+    }
      sort(arr);
+     long end = System.currentTimeMillis();
      System.out.println(Arrays.toString(arr));
+     System.out.println("That took " + (end-start) + " milliseconds");
+     
+     
 
     }
 }

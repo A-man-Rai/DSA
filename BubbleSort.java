@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 class BubbleSort{
     static void sort(int[]arr){
         for(int i=0;i<arr.length-1;i++){
@@ -12,9 +14,23 @@ class BubbleSort{
         }
 
     }
+    public static int generateRandomInteger(){
+      Random rand = new Random();
+      return rand.nextInt(1000);
+    }
     public static void main(String args[]){
-      int[]arr={3,5,7,8,10,1,3,0,1};
+      int n=100000;
+      int[]arr=new int[n];
+      int i=0;
+      long start = System.currentTimeMillis();
+      while(i<n){
+      arr[i]=generateRandomInteger();
+      i++;
+      }
      sort(arr);
+     long end = System.currentTimeMillis();
      System.out.println(Arrays.toString(arr));
+     System.out.println("That took " + (end-start) + " milliseconds");
+     
     }
 }
