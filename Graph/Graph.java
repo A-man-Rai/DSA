@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Queue;
+import java.util.LinkedList;
 class Graph{
     ArrayList<Node> list;
     int[][]adjacentMatrix;
@@ -6,6 +8,7 @@ class Graph{
     public  static class Node{
         String data;
         int index;
+        boolean isVisited;
         Node(int index,String data){
           this.data=data;
           this.index=index;
@@ -33,6 +36,40 @@ class Graph{
         }
     }
 
+
+    public ArrayList<Node> getNeighbour(Node node){
+    int index=node.index;
+    ArrayList<Node>neighbour=new ArrayList<Node>();
+     for(int i=0;i<adjacentMatrix.length;i++){
+      if(adjacentMatrix[index][i]==1){
+         neighbour.add(list.get(i));
+       }
+      }
+      return neighbour;
+     }
+
+    public void bfsTraversal(){
+      Node node=list.get(0);
+      Queue<Node> q=new LinkedList<Node>();
+      q.add(node);
+      while(!q.isEmpty()){
+       Node temp=q.remove();
+       temp.isVisited=true;
+       System.out.print(temp.data+" ");
+       ArrayList<Node>neighbour=getNeighbour(temp);
+       for(Node ele : neighbour){
+       if(!ele.isVisited){
+        q.add(ele);
+        ele.isVisited=true;
+        }  
+       }
+      }
+    }
+
+     
+
+
+
     public static void main(String args[]){
      ArrayList<Node> list=new ArrayList<>();
      list.add(new Node(0,"A"));
@@ -48,7 +85,7 @@ class Graph{
      graph.addEdge(2,3);
      graph.addEdge(3,4);
      graph.print();
-
+     graph.bfsTraversal();
 
     }
 }
