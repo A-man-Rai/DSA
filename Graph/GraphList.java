@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 class GraphList{
      ArrayList<Node> list;
      
@@ -37,8 +38,8 @@ class GraphList{
         }
     }
   
-    public void bfs(){
-      Node node=list.get(0);
+    public void bfsTraversal(Node node){
+    
       Queue<Node>q=new LinkedList<Node>();
       q.add(node);
       while(!q.isEmpty()){
@@ -50,6 +51,30 @@ class GraphList{
              q.add(ele);
              ele.isVisited=true;
            }
+        }
+      }
+    }
+
+    public void bfs(){
+      for(Node node:list){
+          if(!node.isVisited){
+              bfsTraversal(node);
+          }
+      }
+    }
+
+    public void dfs(){
+      Stack<Node> stack=new Stack<Node>();
+      stack.push(list.get(0));
+      while(!stack.isEmpty()){
+        Node temp=stack.pop();
+        temp.isVisited=true;
+        System.out.print(temp.data+" ");
+        for(Node node : temp.neighbour){
+             if(!node.isVisited){
+                 stack.push(node);
+                 node.isVisited=true;
+             }
         }
       }
     }
@@ -69,6 +94,7 @@ class GraphList{
      graph.addEdge(2,3);
      graph.addEdge(3,4);
      graph.print();
-     graph.bfs();
+    // graph.bfs();
+    graph.dfs();
     }
 }

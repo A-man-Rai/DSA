@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Stack;
 class Graph{
     ArrayList<Node> list;
     int[][]adjacentMatrix;
@@ -66,6 +67,23 @@ class Graph{
       }
     }
 
+    public void dfs(){
+      Stack<Node> stack = new Stack<Node>();
+      stack.push(list.get(0));
+      while(!stack.isEmpty()){
+         Node temp=stack.pop();
+         temp.isVisited=true;
+          System.out.print(temp.data+" ");
+          ArrayList<Node> neighbour=getNeighbour(temp);
+          for(Node neigh:neighbour){
+           if(!neigh.isVisited){
+              stack.push(neigh);
+              neigh.isVisited=true;
+            } 
+          }
+      }
+    }
+
      
 
 
@@ -85,7 +103,9 @@ class Graph{
      graph.addEdge(2,3);
      graph.addEdge(3,4);
      graph.print();
-     graph.bfsTraversal();
+     //graph.bfsTraversal();
+     System.out.println();
+     graph.dfs();
 
     }
 }
