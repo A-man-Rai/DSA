@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Stack;
 class Topological{
     ArrayList<Node> list;
     static int index;
@@ -7,6 +8,7 @@ class Topological{
         String data;
         ArrayList<Node>neighbour;
         int index;
+        boolean isVisited;
         
         public Node(int index,String data){
             this.index=index;
@@ -46,17 +48,41 @@ class Topological{
   
     public void printGraph(){
         for(Node node : list){
-            if(node.neighbour==null){
-                System.out.println(node.data);
-            }
-            else{
+            System.out.print(node.data+"->");
                 for(Node temp:node.neighbour){
-                System.out.print(node.data+"->");
-                System.out.println(temp.data+" ");
+                System.out.print(temp.data+" ");
                 }
+           
+           System.out.println();
+        }
+    }
+
+    public void pushNode(Node node , Stack<Node>stack){
+        if(node==null){
+           return;
+        }
+       
+        ArrayList<Node> neighbours=node.neighbour;
+        for(Node neighbour: neighbours){
+                pushNode(neighbour,stack);
+        }
+        if(!node.isVisited){
+            node.isVisited=true;
+           stack.push(node);
+        }
+    }
+
+    public void topologicalSort(){
+    Stack<Node> stack=new Stack<Node>();
+        for(Node node: list){
+           if(!node.isVisited){
+             pushNode(node,stack);
            }
-         //  System.out.println();
-        }//
+       }  
+       while(!stack.isEmpty()){
+           Node node=stack.pop();
+           System.out.print(node.data+" ");
+       }  
     }
     
    
@@ -79,7 +105,7 @@ class Topological{
     graph.addEdge(4,7);
     graph.addEdge(5,6);
     graph.printGraph();
-    
+    graph.topologicalSort();
 
     }
 }
